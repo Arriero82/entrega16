@@ -53,10 +53,10 @@ const productos = require('./file.json')
 })
 .finally(() => knex3.destroy()); */
 
-/* knex3('messages').where('name', 'Gabo').del()
+knex3('messages').del()
 .then(() => console.log('registro eliminado'))
 .catch((error) => {
   console.log(error);
   throw error;      
 })
-.finally(() => knex3.destroy()); */
+.finally(() => knex3.destroy()); 

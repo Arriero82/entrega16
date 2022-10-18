@@ -14,12 +14,13 @@ class Messages {
         return [];
       }
     } catch (error) {
-      console.log(error);
+      console.log(error); 
     }
   }
   async save(obj) {
     try {
-      await knex3(this.table).insert(obj);
+      await knex3(this.table).insert(obj)
+      console.log('registro creado');
     } catch (error) {
       console.log(error);
     }

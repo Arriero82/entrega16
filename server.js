@@ -21,9 +21,9 @@ app.set("view engine", "ejs");
 
 //app.use("/", productos);
 
-app.get('/', async (req, res) => {
-  res.status(200).render('pages/index');
-})
+app.get("/", async (req, res) => {
+  res.status(200).render("pages/index");
+});
 
 app.all("*", (req, res) => {
   res.json({ res: "no se puede acceder a esta ruta" });
@@ -40,18 +40,16 @@ io.on("connection", async (cliente) => {
 
   cliente.emit("productos-server", await products.getAll());
 
-  cliente.on("new-product", (producto) => {
-    console.log(producto);
-    products.save(producto);
-    io.sockets.emit("productos-server", products.getAll());
+  cliente.on("new-product", async (producto) => {
+    await products.save(producto);
+    io.sockets.emit("productos-server", await products.getAll());
   });
 
-/*   cliente.emit("mensajes-server", await messages.getAll());
+  cliente.emit("mensajes-server", await messages.getAll());
 
   cliente.on("new-message", async (mensaje) => {
-    //await messages.save(mensaje);
+    await messages.save(mensaje)
 
     io.sockets.emit("mensajes-server", await messages.getAll());
-  }); */
+  });
 });
-

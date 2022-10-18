@@ -1,17 +1,23 @@
 const socket = io.connect() 
 
-const addProduct = (e) => {
-    const title = document.querySelector('#title').value;
+const addProduct = () => {
+    const make = document.querySelector('#make').value;
+    const model = document.querySelector('#model').value;
     const price = document.querySelector('#price').value;
     const thumbnail = document.querySelector('#thumbnail').value;
-    socket.emit('new-product', {title, price, thumbnail})
+    const description = document.querySelector('#description').value;
+    const code = document.querySelector('#code').value;
+    const stock =  document.querySelector('#stock').value
+    socket.emit('new-product', {make, model, price, thumbnail, description, code, stock})
     return false
 }
+document.getElementById('enviar').addEventListener('click', () => addProduct())
     
 const render = (prods) => {     
     const listado = prods.map((elem) => {
-        return(
+        return(         
             `<div class="articulos">
+            <h3>Marca ${elem.make}</h3>
             <h3>Modelo ${elem.model}</h3>
             <h3>Precio ${elem.price}</h3>
             <img src="${elem.thumbnail}" alt="${elem.title}"/>
@@ -21,19 +27,20 @@ const render = (prods) => {
     document.querySelector('#listaProductos').innerHTML = listado;
 }
 
-const addMessage = (e) => {
-    const username = document.querySelector('#username').value;
-    const text = document.querySelector('#text').value;
-    socket.emit('new-message', {username, text})
+const addMessage = () => {
+    const name = document.querySelector('#name').value;
+    const message = document.querySelector('#message').value;
+    socket.emit('new-message', {name, message})    
     return false
 }
+document.getElementById('sendMessage').addEventListener('click', () => addMessage())
 
 const renderMessages = (messages) => {     
     const messagesList = messages.map((elem) => {
         return(
             `<div>
-            <strong>${elem.username}</strong >
-            <em>${elem.text}</em >
+            <strong>${elem.name}</strong >
+            <em>${elem.message}</em >
             </div >`
         )
     }).join(' ');

@@ -8,11 +8,11 @@
 </head>
 <body>
     <h3>Chat</h3>
-    <form onsubmit="return addMessage(this)">
-        <input type="text" name="username" id="username" placeholder="ingrese nombre">
-        <input type="text" id="text" id="text" placeholder="Escribe tu mensaje">
-        <button>Enviar</button>
-    </form>
+    <div class="form">
+        <input type="text" name="name" id="name" placeholder="ingrese nombre">
+        <input type="text" id="message" id="message" placeholder="Escribe tu mensaje">
+        <button id="sendMessage">Enviar</button>
+   </div>
     
     <div id="listaMensajes"></div>
 
